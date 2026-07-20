@@ -8,21 +8,22 @@ let url = `${process.env.MONGO_URL}`;
 let dbInstance = null;
 const dbName = "giftdb";
 
+
 async function connectToDatabase() {
-    if (dbInstance){
-        return dbInstance
-    };
+    try {
+        const client = new MongoClient(url);
 
-    const client = new MongoClient(url);      
+        await client.connect();
+        console.log('Connection successful');
 
-    // Task 1: Connect to MongoDB
-    // {{insert code}}
+        const dbInstance = client.db(dbName);
 
-    // Task 2: Connect to database giftDB and store in variable dbInstance
-    //{{insert code}}
+        return dbInstance;
 
-    // Task 3: Return database instance
-    // {{insert code}}
+    } catch (error) {
+        console.log("DB connection failed:", error);
+        throw error;
+    }
 }
 
 module.exports = connectToDatabase;
