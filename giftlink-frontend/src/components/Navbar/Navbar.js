@@ -25,6 +25,10 @@ export default function Navbar() {
               Profile
             </Link>
           </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/app/search">Search</Link>
+            </li>
+
         </ul>
       </div>
     </nav>
