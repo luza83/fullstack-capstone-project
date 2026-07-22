@@ -124,8 +124,6 @@ router.post("/login", async (req, res) => {
     }
 });
 
-const { body, validationResult } = require('express-validator');
-
 router.put('/update', async (req, res) => {
     // Task 2: Validate the input using `validationResult` and return approiate message if there is an error.
     try {const errors = validationResult(req);
