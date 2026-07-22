@@ -59,57 +59,46 @@ function LoginPage() {
 
   return (
     <div className="login-page">
-      <div className="row justify-content-center">
-        <div className="col-md-6 col-lg-4">
-          <div className="login-card p-4 border rounded">
-            <h2 className="login-title">Login</h2>
+      <div className="login-card">
+        <h2 className="login-title">Welcome Back</h2>
 
-            <form className="login-form" onSubmit={handleLogin}>
-              <label className="login-label" htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                className="login-input"
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder="Enter your email"
-              />
+        <form className="login-form" onSubmit={handleLogin}>
+          <label htmlFor="email" className="login-label">
+            Email
+          </label>
 
-              <label className="login-label" htmlFor="password">
-                Password
-              </label>
-              <input
-                id="password"
-                className="login-input"
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                placeholder="Enter your password"
-              />
-              <span
-                style={{
-                  color: "red",
-                  height: ".5cm",
-                  display: "block",
-                  fontStyle: "italic",
-                  fontSize: "12px",
-                }}
-              >
-                {incorrect}
-              </span>
+          <input
+            id="email"
+            className="login-input"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+          />
 
-              <button className="login-btn" type="submit">
-                Login
-              </button>
-            </form>
+          <label htmlFor="password" className="login-label">
+            Password
+          </label>
 
-            <p className="login-link">
-              New here? <a href="/app/register">Register Here</a>
-            </p>
-          </div>
-        </div>
+          <input
+            id="password"
+            className="login-input"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+          />
+
+          <span className="login-error">{incorrect}</span>
+
+          <button className="login-btn" type="submit">
+            Login
+          </button>
+        </form>
+
+        <p className="login-link">
+          New here? <a href="/app/register">Create an account</a>
+        </p>
       </div>
     </div>
   );
