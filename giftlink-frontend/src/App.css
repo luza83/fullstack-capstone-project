@@ -156,34 +156,44 @@ body,
   font-weight: bold; /* Makes the active link bold */
 }
 
-/* Style for login button */
-.nav-link.login-btn {
-  background-color: #28a745; /* A green color for login */
+/* Style for auth buttons */
+.nav-link.login-btn,
+.nav-link.register-btn,
+.nav-link.auth-nav-btn {
+  background-color: #7c3aed;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  transition: background-color 0.2s ease-in-out;
+  margin-left: 0.35rem;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .nav-link.login-btn:hover,
-.nav-link.login-btn:focus {
-  background-color: #218838; /* A darker green on hover/focus for login */
+.nav-link.register-btn:hover,
+.nav-link.auth-nav-btn:hover,
+.nav-link.login-btn:focus,
+.nav-link.register-btn:focus,
+.nav-link.auth-nav-btn:focus {
+  background-color: #5b21b6;
   color: white;
   text-decoration: none;
+  transform: translateY(-1px);
 }
 
 /* Style for logout button */
 .nav-link.logout-btn {
-  background-color: #dc3545; /* A red color for logout */
+  background-color: #dc3545;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  transition: background-color 0.2s ease-in-out;
+  margin-left: 0.35rem;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .nav-link.logout-btn:hover,
 .nav-link.logout-btn:focus {
-  background-color: #c82333; /* A darker red on hover/focus for logout */
+  background-color: #c82333;
   color: white;
   text-decoration: none;
+  transform: translateY(-1px);
 }
