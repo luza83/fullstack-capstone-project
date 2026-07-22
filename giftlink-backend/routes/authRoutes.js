@@ -15,50 +15,62 @@ const logger = pino();  // Create a Pino logger instance
 
 router.post('/register', async (req, res) => {
     try {
-        // Task 1: Connect to `giftsdb` in MongoDB through `connectToDatabase` in `db.js`
-		const db = await connectToDatabase();
+        const db = await connectToDatabase();
+        const collection = db.collection("users");
 
-        // Task 2: Access MongoDB collection
-		const collection = db.collection("users");
-        if (!req.body.email || !req.body.password) {
+        const { email, password, firstName, lastName } = req.body;
+
+        if (!email || !password) {
             logger.warn({ email }, "Registration attempt missing required fields");
-            return res
-              .status(400)
-              .json({ message: "Email and password are required" });
-          }
-		//Task 3: Check for existing email
-		const existingEmail = await collection.findOne({ email: req.body.email });
+
+            return res.status(400).json({
+                message: "Email and password are required"
+            });
+        }
+
+        const existingEmail = await collection.findOne({ email });
 
         if (existingEmail) {
             logger.warn({ email }, "Registration attempt for existing user");
-            return res.status(409).json({ message: "User already exists" });
-          }
-      
-		const salt = await bcryptjs.genSalt(10);
-        const hash = await bcryptjs.hash(req.body.password, salt);
-		const email = req.body.email;
+
+            return res.status(409).json({
+                message: "User already exists"
+            });
+        }
+
+        const salt = await bcryptjs.genSalt(10);
+        const hash = await bcryptjs.hash(password, salt);
 
         const newUser = await collection.insertOne({
-            email: req.body.email,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            email,
+            firstName,
+            lastName,
             password: hash,
             createdAt: new Date(),
         });
 
-         //Task 5: Create JWT authentication with user._id as payload
-         const payload = {
+        const payload = {
             user: {
-                id: newUser.insertedId,
+                id: newUser.insertedId.toString(),
             },
         };
 
         const authtoken = jwt.sign(payload, JWT_SECRET);
 
-        logger.info('User registered successfully');
-        res.json({authtoken,email});
+        logger.info({ email }, "User registered successfully");
+
+        return res.status(201).json({
+            authtoken,
+            email,
+            firstName
+        });
+
     } catch (e) {
-         return res.status(500).send('Internal server error');
+        console.error("Register error:", e);
+
+        return res.status(500).json({
+            message: e.message
+        });
     }
 });
 

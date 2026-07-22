@@ -16,7 +16,7 @@ function RegisterPage() {
 
   const handleRegister = async (event) => {
     event.preventDefault();
-
+  
     try {
       const response = await fetch(`${backendBaseUrl}/api/auth/register`, {
         method: "POST",
@@ -30,19 +30,27 @@ function RegisterPage() {
           password,
         }),
       });
-
+  
+      const data = await response.json();
+  
       if (!response.ok) {
         throw new Error(data.message || "Registration failed");
       }
-      const data = await response.json();
-      if (json.authtoken) {
+  
+      if (data.authtoken) {
         sessionStorage.setItem("auth-token", data.authtoken);
         sessionStorage.setItem("name", firstName);
-        sessionStorage.setItem("email", json.email);
+        sessionStorage.setItem("email", data.email || email);
+  
         setIsLoggedIn(true);
         navigate("/app");
+      } else {
+        // If backend does not return token
+        navigate("/app/login");
       }
+  
     } catch (error) {
+      console.error("Registration error:", error);
       setShowerr(error.message);
     }
   };
