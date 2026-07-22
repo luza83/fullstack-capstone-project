@@ -37,7 +37,10 @@ export default function Navbar() {
         className="navbar navbar-expand-lg navbar-light bg-light"
         id="navbar_container"
       >
-        <a className="navbar-brand" href={`${urlConfig.backendUrl}/app`}>
+        <a
+          className="navbar-brand theme-brand"
+          href={`${urlConfig.backendUrl}/app`}
+        >
           GiftLink
         </a>
 
@@ -57,61 +60,59 @@ export default function Navbar() {
           className="collapse navbar-collapse justify-content-end"
           id="navbarNav"
         >
-          <ul className="navbar-nav">
+          <ul className="navbar-nav align-items-center">
             <li className="nav-item">
-              <a className="nav-link" href="/home.html">
-                Home
-              </a>{" "}
-              {/* Link to home.html */}
+              <a className="nav-link" href="/home.html" title="Home">
+                🏠
+              </a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/app">
-                Gifts
-              </Link>{" "}
-              {/* Updated Link */}
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/app/search">
-                Search
+              <Link className="nav-link" to="/app" title="Gifts">
+                🎁
               </Link>
             </li>
-            <ul className="navbar-nav ml-auto">
-              {isLoggedIn ? (
-                <>
-                  <li className="nav-item">
-                    {" "}
-                    <span
-                      className="nav-link"
-                      style={{ color: "black", cursor: "pointer" }}
-                      onClick={profileSecton}
-                    >
-                      Welcome, {userName}
-                    </span>{" "}
-                  </li>
-                  <li className="nav-item">
-                    <button
-                      className="nav-link logout-btn"
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li className="nav-item">
-                    <Link className="nav-link auth-nav-btn" to="/app/login">
-                      Login
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link auth-nav-btn" to="/app/register">
-                      Register
-                    </Link>
-                  </li>
-                </>
-              )}
-            </ul>
+            <li className="nav-item">
+              <Link className="nav-link" to="/app/search" title="Search">
+                🔍
+              </Link>
+            </li>
+          </ul>
+
+          <ul className="navbar-nav ml-auto align-items-center">
+            {isLoggedIn ? (
+              <>
+                <li className="nav-item">
+                  <span
+                    className="nav-link"
+                    style={{ color: "black", cursor: "pointer" }}
+                    onClick={profileSecton}
+                  >
+                    Welcome, {userName}
+                  </span>
+                </li>
+                <li className="nav-item">
+                  <button
+                    className="nav-link logout-btn"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link auth-nav-btn" to="/app/login">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link auth-nav-btn" to="/app/register">
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>

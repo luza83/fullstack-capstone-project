@@ -159,13 +159,21 @@ body,
 /* Style for auth buttons */
 .nav-link.login-btn,
 .nav-link.register-btn,
-.nav-link.auth-nav-btn {
+.nav-link.auth-nav-btn,
+.theme-brand {
   background-color: #7c3aed;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   margin-left: 0.35rem;
   transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.theme-brand {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .nav-link.login-btn:hover,
