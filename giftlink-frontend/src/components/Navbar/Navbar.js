@@ -31,88 +31,103 @@ export default function Navbar() {
   const profileSecton = () => {
     navigate(`/app/profile`);
   };
-  return (
-    <>
-      <nav
-        className="navbar navbar-expand-lg navbar-light bg-light"
-        id="navbar_container"
-      >
-        <a className="navbar-brand" href={`${urlConfig.backendUrl}/app`}>
-          GiftLink
-        </a>
+return (
+  <nav className="navbar navbar-expand-lg" id="navbar_container">
+   <a className="nav-link" href="/home.html" title="Home">
+      <i className="fas fa-gift brand-icon"></i>
+      <span className="brand-gift">Gift</span>
+      <span className="brand-link">Link</span>
+    </a>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+    <button
+      className="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span className="navbar-toggler-icon"></span>
+    </button>
 
-        <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarNav"
-        >
-          <ul className="navbar-nav align-items-center">
-            <li className="nav-item">
-              <a className="nav-link" href="/home.html" title="Home">
-                🏠
-              </a>
+    <div
+      className="collapse navbar-collapse justify-content-between"
+      id="navbarNav"
+    >
+      <ul className="navbar-nav mx-auto">
+
+        <li className="nav-item">
+          <a className="nav-link" href="/home.html" title="Home">
+            <i className="fas fa-home"></i>
+            <span> Home</span>
+          </a>
+        </li>
+
+        <li className="nav-item">
+          <Link className="nav-link" to="/app">
+            <i className="fas fa-gifts"></i>
+            <span> Gifts</span>
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link className="nav-link" to="/app/search">
+            <i className="fas fa-search"></i>
+            <span> Search</span>
+          </Link>
+        </li>
+
+      </ul>
+
+      <ul className="navbar-nav align-items-center">
+
+        {isLoggedIn ? (
+          <>
+            <li className="nav-item me-3">
+              <span
+                className="nav-link welcome-user"
+                onClick={profileSecton}
+              >
+                <i className="fas fa-user-circle"></i>
+                {" "}
+                {userName}
+              </span>
             </li>
+
             <li className="nav-item">
-              <Link className="nav-link" to="/app" title="Gifts">
-                🎁
+              <button
+                className="nav-link logout-btn"
+                onClick={handleLogout}
+              >
+                <i className="fas fa-sign-out-alt"></i>
+                {" "}
+                Logout
+              </button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="nav-item">
+              <Link className="nav-link auth-nav-btn" to="/app/login">
+                <i className="fas fa-sign-in-alt"></i>
+                {" "}
+                Login
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/app/search" title="Search">
-                🔍
+
+            <li className="nav-item ms-2">
+              <Link className="nav-link auth-nav-btn" to="/app/register">
+                <i className="fas fa-user-plus"></i>
+                {" "}
+                Register
               </Link>
             </li>
-          </ul>
+          </>
+        )}
 
-          <ul className="navbar-nav ml-auto align-items-center">
-            {isLoggedIn ? (
-              <>
-                <li className="nav-item">
-                  <span
-                    className="nav-link"
-                    style={{ color: "black", cursor: "pointer" }}
-                    onClick={profileSecton}
-                  >
-                    Welcome, {userName}
-                  </span>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className="nav-link logout-btn"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link auth-nav-btn" to="/app/login">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link auth-nav-btn" to="/app/register">
-                    Register
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
-      </nav>
-    </>
-  );
+      </ul>
+    </div>
+  </nav>
+);
 }
