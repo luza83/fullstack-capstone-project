@@ -112,6 +112,11 @@ function RegisterPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Create a password"
           />
+          {showerr && (
+            <div className="text-danger mb-3">
+              {showerr}
+            </div>
+          )}
 
           <button className="register-btn" type="submit">
             Register
